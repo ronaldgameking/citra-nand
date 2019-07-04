@@ -10,3 +10,5 @@ There is no compiling needed, its a batch file.  :smile:
 ## Portable?
 Yes, there is portable mode coming!
 To run this in **portable mode**, place this into the directory of the **Citra executable**.
+# Errors
+**No errors reported. Please report them in the [Issues tab](https://github.com/ronaldgameking/citra-nand/issues)!**
