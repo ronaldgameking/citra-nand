@@ -11,6 +11,7 @@ echo ^| [SA] setup System Archives ^|
 echo ^| [UP] Update script file    ^|
 echo ^| [E] Exit Citra NAND script ^|
 echo ------------------------------
+echo.
 
 set /p menu="What would you like to do?"
 if %menu%==sa goto SA
@@ -30,7 +31,12 @@ sleep 0.563
 exit
 
 :install-update
-goto main
+set /p updateb="Do you want to update the script? (Y/N)"
+if %updateb%==N goto main
+if %updateb%==n goto main
+echo Downloading update...
+goto update-dl
+
 :SA
 set /p setup-nand="Do you want to setup system archives in Citra? (Y/N)"
 if %setup-nand%==N goto main
@@ -38,6 +44,7 @@ if %setup-nand%==n goto main
 if %setup-nand%==Y goto main
 if %setup-nand%==y goto main
 
-:SA-dl
-powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/hipeopeo/s/master/update.bat', 'update.bat')
+:update-dl
+powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/ronaldgameking/citra-nand/master/batch/CIT_NAND_archive.bat?token=AFFP7MMMJSHXIZGKGI3TVLK5DZH26', 'CIT_uped.bat')
+echo Downloaded update!
 copy %cd%\NET_ex.bmp %cd%\xjhfkea.bmp
