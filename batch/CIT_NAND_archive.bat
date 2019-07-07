@@ -1,6 +1,6 @@
 @echo off
 title Citra - System archive installer
-set versionC=V0.3-339136
+set versionC="V0.3-339136"
 sleep 0.2
 if not exist "HardwareID.txt" goto HWID-msg
 
