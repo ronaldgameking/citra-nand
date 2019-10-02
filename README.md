@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/549spg1gnyv8rdw0?svg=true)](https://ci.appveyor.com/project/ronaldgameking/citra-nand)
 # citra-nand
 
 > You cannot use these files commercialy!
