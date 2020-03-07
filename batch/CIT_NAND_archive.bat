@@ -97,7 +97,7 @@ if %setup-mode%==P goto
 if %setup-mode%==p goto
 title Citra - System archive installer ^| Downloading NAND
 echo Downloading NAND...
-powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/ronaldgameking/citra-nand/master/nand-data/user.zip', 'nand.zip')
+powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/ronaldgameking/citra-nand/master/nand-data/nand_normal.zip', 'nand.zip')
 echo.
 echo Downloaded NAND!
 title Citra - System archive installer ^| Downloaded NAND
