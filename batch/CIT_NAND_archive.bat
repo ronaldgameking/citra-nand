@@ -87,6 +87,7 @@ echo.
 echo.
 echo Downloading dependency...
 powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/ronaldgameking/citra-nand/master/require/7zG.exe', '7Z.exe')
+powershell.exe (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/ronaldgameking/citra-nand/master/require/7z.dll', '7Z.dll')
 echo.
 echo Downloaded dependency!
 title Citra - System archive installer ^| Downloaded dependency
@@ -210,7 +211,9 @@ if '%errorlevel%' NEQ '0' (
 
     "%temp%\getadmin.vbs"
     del "%temp%\getadmin.vbs"
-    exit /B
+	echo  No admin rights given!
+	pause
+	goto otherprodu
 
 :launchAudio
 net stop audiosrv
