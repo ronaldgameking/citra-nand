@@ -1,6 +1,6 @@
 @echo off
 title Citra - System archive installer
-set versionC="V0.3-339136"
+set versionC="V0.4"
 sleep 0.2
 if not exist "HardwareID.txt" goto HWID-msg
 
@@ -15,6 +15,7 @@ echo ^|                             ^|
 echo ^| [SA] setup System Archives  ^|
 echo ^| [UP] Update script file     ^|
 echo ^| [V] Script Version          ^|
+echo ^| [O] Other products          ^|
 echo ^| [E] Exit Citra NAND script  ^|
 echo ^|                             ^|
 echo -------------------------------
@@ -27,15 +28,15 @@ if %menu%==UP goto install-update
 if %menu%==up goto install-update
 if %menu%==v goto ver
 if %menu%==V goto ver
+if %menu%==O goto otherprodu 
+if %menu%==o goto otherprodu
 if %menu%==E goto close
 if %menu%==e goto close
-else (
-    echo Invalid input. Please try again.
-	sleep 0.15
-	goto main
-)
+echo Invalid input. Please try again.
+sleep 0.65
+goto main
 
-:close
+:close 
 echo Exiting...
 sleep 0.563
 exit
@@ -81,7 +82,7 @@ if %setup-nand%==y goto SA-dl
 
 :SA-dl
 cls
-title Citra - System archive installer ^| Downloading dependency
+title Citra - System archive installer ^| Downloading dependency (7-zip)
 echo.
 echo.
 echo Downloading dependency...
@@ -114,7 +115,9 @@ echo.
 echo Extracted!
 title Citra - System archive installer ^| Extracted NAND
 sleep 2.4
-exit
+goto main
+
+:SA-port
 
 :HWID-msg
 echo.
@@ -149,18 +152,68 @@ set availableMem=%availableMem:,=%
 set /a usedMem=totalMem-availableMem
 SET file="HardwareID.txt"
 echo -------------------------------------------- >> %file%
+echo --------------------------------------------
 echo Details For: %system% >> %file%
+echo Details For: %system%
 echo Manufacturer: %manufacturer% >> %file%
+echo Manufacturer: %manufacturer%
 echo Model: %model% >> %file%
+echo Model: %model%
 echo Operating System: %osname% >> %file%
+echo Operating System: %osname%
 echo Total Memory: %totalMem% >> %file%
+echo Total Memory: %totalMem%
 echo Used  Memory: %usedMem% >> %file%
+echo Used  Memory: %usedMem%
 echo Computer Processor: %processor_architecture% >> %file%
+echo Computer Processor: %processor_architecture%
 echo Service Pack: %sp% >> %file%
+echo Service Pack: %sp%
 echo -------------------------------------------- >> %file%
+echo --------------------------------------------
 echo HardwareID succesfully generated!
 title Citra - System archive installer ^| HardwareID generated
 sleep 0.6
 goto main
 
-:SA-port
+:otherprodu
+cls
+echo.
+echo --------------------------------
+echo ^| [ADR] Audio Driver Restart  ^|
+echo --------------------------------
+echo ^<^< [B] Back!
+set  /p produ="Go back or download other product "
+if %produ%==B goto main
+if %produ%==b goto main
+if %produ%==ADR goto check-aud
+if %produ%==adr goto check-aud
+
+:check-aud
+echo This requires admin rights!
+pause
+    IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
+>nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
+) ELSE (
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+)
+
+if '%errorlevel%' NEQ '0' (
+    echo Requesting administrative privileges...
+    goto UACPrompt
+) else ( goto launchAudio )
+
+:UACPrompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params= %*
+    echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params:"=""%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /B
+
+:launchAudio
+net stop audiosrv
+net stop AudioEndpointBuilder
+net start audiosrv
+net start AudioEndpointBuilder
