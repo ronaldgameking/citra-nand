@@ -1,6 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/549spg1gnyv8rdw0?svg=true)](https://ci.appveyor.com/project/ronaldgameking/citra-nand)
 # citra-nand
-
+**THIS WILL BE REMADE IN ANOTHER LANGUAGE**
 > You cannot use these files commercialy!
 ## Installation
 1. Download the `.bat` file from [here](batch/CIT_NAND_archive.bat) or [here](https://github.com/ronaldgameking/citra-nand/releases)
