@@ -3,7 +3,7 @@
 **THIS WILL BE REMADE IN ANOTHER LANGUAGE**
 > You cannot use these files commercialy!
 ## Installation
-1. Download the `.bat` file from [here](batch/CIT_NAND_archive.bat) or [here](https://github.com/ronaldgameking/citra-nand/releases)
+1. Download the `.bat` file from [here](https://github.com/ronaldgameking/citra-nand/releases)
 2. Run the `.bat` file in any directory you want.
 3. Follow the instructions on-screen
 ## Compiling
